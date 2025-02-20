@@ -5,9 +5,9 @@ export default function Layout() {
   return (
     <div>
         <Navbar></Navbar>
-            <div className="container">
+           <main>
                 <Outlet />
-            </div>  
+            </main>  
         <footer>Copyrights</footer>
     </div>
   )
