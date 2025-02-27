@@ -3,8 +3,18 @@
 import { Link } from "react-router-dom";
 import { users } from "../data/users";
 import Card from "../ui/Card";
+import { useEffect, useState } from "react";
 export default function Home() {
-  const usersList = users;
+  // let usersList = users;
+  const [usersList , setUsers] = useState([])
+  useEffect(()=>{
+    fetch('http://localhost:3000/users')
+    .then(response=>response.json())
+    .then(data=>{
+      setUsers(data)
+      console.log(data)
+    })
+  } ,[])
   return (
     <div className="row">
       {usersList.map((user, index) => {

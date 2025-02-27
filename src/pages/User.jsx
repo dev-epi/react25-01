@@ -1,18 +1,22 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { users } from "../data/users"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import '../assets/cv.css'
 export const User = () => {
   let {id} = useParams()
   let navigate = useNavigate()
-
+  const [user , setUser] = useState({})
   //initialisation
   useEffect(()=>{
-    let user = users.find(u=>u._id == id)
-    if(!user){
-      navigate('/')
-    }
-  })
+    
+      fetch('http://localhost:3000/user/'+id)
+      .then(response=>response.json())
+      .then(data=>{
+        setUser(data)
+      })
+    
+  
+  },[])
  
  
   return (
@@ -29,11 +33,11 @@ export const User = () => {
         <hr />
         <div className="section-content">
           <h4>Name:</h4>
-          <p></p>
+          <p>{user.firstName}</p>
           <h4>Email Address:</h4>
-          <p>omarxcoder@gmail.com</p>
+          <p>{user.email}</p>
           <h4>Phone:</h4>
-          <p>+44 1223 34453</p>
+          <p>{user.phone}</p>
           <h4>Address:</h4>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -85,7 +89,7 @@ export const User = () => {
     </aside>
     <main id="main">
       <section className="main-section">
-        <h2>Farid Messaoudi</h2>
+        <h2>{user.firstName} {user.lastName}</h2>
         <hr />
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat similique laboriosam, ex rerum voluptatibus id quis tempora laborum eligendi, autem error est distinctio nam!
