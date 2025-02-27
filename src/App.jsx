@@ -8,6 +8,7 @@ import Signup from "./auth/Signup";
 import ForgotPassword from "./auth/ForgotPassword";
 import ResetPassword from "./auth/ResetPassword";
 import NotFound from "./pages/NotFound";
+import { User } from "./pages/User";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="" element={<Home></Home>} />
+            <Route path="user/:id" element={<User/>}/>
             <Route path="profile" element={<Profile />} />
             <Route path="test" element={<h1>Bonjour</h1>} />
           </Route>
