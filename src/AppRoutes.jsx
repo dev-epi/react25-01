@@ -20,7 +20,7 @@ export default function AppRoutes() {
         <Route path="test" element={<h1>Bonjour</h1>} />
       </Route>
 
-      <Route path="/" element={<AuthLayout />}>
+      <Route path="/auth" element={<AuthLayout />}>
         <Route path="signin" element={<Signin />} />
         <Route path="signup" element={<Signup />} />
         <Route path="forgot-password" element={<ForgotPassword />} />

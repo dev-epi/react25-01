@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { users } from "../data/users"
 import { useEffect, useState } from "react"
-import '../assets/cv.css'
+import cvcss from '../assets/cv.module.css'
 export const User = () => {
   let {id} = useParams()
   let navigate = useNavigate()
@@ -20,15 +20,15 @@ export const User = () => {
  
  
   return (
-    <div className="container">
-    <aside id="aside">
+    <div className={cvcss.container}>
+    <aside className={cvcss.aside}>
       <div className="aside-section">
        
         <div className="avatar">
           <img src="assets/avatar.jpg" alt="me" />
         </div>
       </div>
-      <div className="aside-section">
+      <div className={cvcss.asidesection}>
         <h3 className="section-heading">Profilo</h3>
         <hr />
         <div className="section-content">

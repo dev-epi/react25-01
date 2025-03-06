@@ -35,12 +35,12 @@
     display: flex;
 }
 
-.section-heading {
+.sectionheading {
     margin-bottom: 12px;
     margin-top: 0;
 }
 
-#aside {
+.aside {
     flex: 240px 0 0;
     background: #424953;
     color: #fff;
@@ -72,7 +72,7 @@
     margin-bottom: 16px;
 }
 
-.aside-section {
+.asidesection {
     padding-left: 25px;
 }
 
