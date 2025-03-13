@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function Signin() {
   const navigate = useNavigate()
 const [user , setUser] = useState({})
@@ -48,11 +48,11 @@ const [user , setUser] = useState({})
             <div className="input-group">
                 <input type="password" placeholder="Password" onChange={handleChange} name="password"/>
             </div>
-            <p>&nbsp;</p>
+            <p>{!user.password && 'Mot de passe obligatoire'}</p>
             
             <button type="submit" className="btn btn-secondary">Sign In</button>
         </form>
-        <a href="signup.html">Not a member? Sign Up</a><br/>
+        <Link to="/auth/signup">Not a member? Sign Up</Link><br/>
         <a href="forgot-password.html">Forgot Password ? </a>
     </div>
   )
