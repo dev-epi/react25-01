@@ -1,14 +1,21 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import axiosInstance from "../services/axiosInstance";
+import Swal from "sweetalert2";
 
 export default function Signup() {
      const {register , handleSubmit ,watch, formState : {errors}} = useForm({mode : 'onChange'})
 
      const sendForm = (data)=>{
-      console.log(data)
+        axiosInstance.post('/register' , data)
+        .then(response=>{
+          console.log(response)
+        }).catch(err=>{
+          Swal.fire(err.message)
+        })
      }
   return (
-    <div>
+    <div className="form">
       <form  onSubmit={handleSubmit(sendForm)}>
             <h2>Sign Up</h2>
             <label htmlFor="" >Last Name</label>
@@ -26,9 +33,11 @@ export default function Signup() {
             <label htmlFor="">Email Address</label>
             <div className="input-group">
               
-                <input type="text" placeholder="Email"/>
+                <input type="text" placeholder="Email" 
+                {...register('email' , {pattern : {value:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ ,
+                 message:"Invalid Format"}})}/>
             </div>
-            <p>&nbsp;</p>
+            <p>{errors.email && errors.email.message}</p>
             <label>Password</label>
             
             <div className="input-group">

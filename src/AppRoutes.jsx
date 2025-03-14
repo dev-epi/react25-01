@@ -10,17 +10,20 @@ import ResetPassword from "./auth/ResetPassword";
 import NotFound from "./pages/NotFound";
 import { User } from "./pages/User";
 export default function AppRoutes() {
+  let token = localStorage.getItem('token')
+  console.log(token)
   return (
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Layout />}>
+    
+      <Route path="/" element={token ? <Layout /> : <Navigate to='/auth/signin'/>}>
         <Route path="" element={<Home></Home>} />
         <Route path="user/:id" element={<User/>}/>
         <Route path="profile" element={<Profile />} />
         <Route path="test" element={<h1>Bonjour</h1>} />
       </Route>
 
-      <Route path="/auth" element={<AuthLayout />}>
+      <Route path="/auth" element={!token ? <AuthLayout /> : <Navigate to="/"/>}>
         <Route path="signin" element={<Signin />} />
         <Route path="signup" element={<Signup />} />
         <Route path="forgot-password" element={<ForgotPassword />} />

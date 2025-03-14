@@ -297,3 +297,7 @@ input:focus {
 .active{
   color: #ffea81 !important;
 }
+
+.form p{
+  color : red
+}
