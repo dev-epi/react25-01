@@ -20,7 +20,7 @@ export default function AppRoutes() {
       <Route path="/" element={token ? <Layout /> : <Navigate to='/auth/signin'/>}>
         <Route path="" element={<Home></Home>} />
         <Route path="user/:id" element={<User/>}/>
-        <Route path="profile" element={<Profile />} />
+        <Route path="profile" element={<Profile  logout={()=>setToken(null)}/>} />
         <Route path="test" element={<h1>Bonjour</h1>} />
       </Route>
 

@@ -20,9 +20,9 @@ const [user , setUser] = useState({})
         Swal.fire('login')
     })
     .catch(err=>{
-      if(err.response.data){
+      if(err){
         Swal.fire({
-          title : err.response.data.message,
+          title : err.message,
           icon : 'warning',
           toast : true,
           showConfirmButton : false,

@@ -1,6 +1,25 @@
+import { useEffect, useState } from "react"
+import axiosInstance from "../../services/axiosInstance"
 
 
-export default function Profile() {
+export default function Profile({logout}) {
+
+  const [user , setUser] = useState({})
+  useEffect(()=>{
+    loadData()
+  },[])
+  const loadData = ()=>{
+    axiosInstance.get('/auth')
+    .then(data=>{
+      console.log(data)
+      setUser(data)
+    })
+    .catch(()=>{
+     localStorage.clear()
+      logout()
+      // logout
+    })
+  }
   return (
     <div className="container">
       <div className="card">
@@ -12,10 +31,10 @@ export default function Profile() {
         </div>
         
         <div className="input-group" style={{marginBottom: '10px'}}>
-          <input type="text" placeholder="Full Name" value="Nourhene Amara" />
+          <input type="text" placeholder="Full Name" value={user.firstName} />
         </div>
         <div className="input-group" style={{marginBottom: '10px'}}>
-          <input type="email" placeholder="Email" value="nourhene@example.com" />
+          <input type="email" placeholder="Email" value={user.Email} />
         </div>
         <div className="input-group" style={{marginBottom: '10px'}}>
           <input type="tel" placeholder="Phone Number" value="+216 99 999 999" />
@@ -70,9 +89,13 @@ export default function Profile() {
         <button className="btn btn-primary" type="submit">Add Skill</button>
       </form>
 
-      <ul className="rating" style={{marginTop: '20px'}}>
-        <li>React.js</li>
-        <li>Node.js</li>
+      <ul style={{marginTop: '20px'}}>
+        {
+          user?.skills?.map((item , index)=>{
+            return <li key={index}>{item.name}</li>
+          })
+        }
+        
       </ul>
     </div>
     </div>
