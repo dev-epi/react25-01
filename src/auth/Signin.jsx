@@ -2,7 +2,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../services/axiosInstance";
-export default function Signin() {
+export default function Signin({setLogin}) {
   const navigate = useNavigate()
 const [user , setUser] = useState({})
   const login = (event)=>{
@@ -12,9 +12,10 @@ const [user , setUser] = useState({})
     axiosInstance.post('/login' , user)
     .then(response=>{
        console.log(response)
-       localStorage.
+
         localStorage.setItem('token' , response)
         sessionStorage.setItem('token2' , response)
+        setLogin(response)
         navigate('/')
         Swal.fire('login')
     })
