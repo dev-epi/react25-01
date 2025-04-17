@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
 import SkillForm from './SkillForm'
 
-export default function Skills({user , handlePush}) {
+export default function Skills({user }) {
     
   return (
     <div>
-        <SkillForm pushSkill={handlePush} />
+        <SkillForm  />
          <ul style={{marginTop: '20px'}}>
         {
           user?.skills?.map((item , index)=>{

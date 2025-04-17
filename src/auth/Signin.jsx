@@ -1,39 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../services/axiosInstance";
-export default function Signin({setLogin}) {
+import { UserContext } from "../services/UserContext";
+export default function Signin() {
   const navigate = useNavigate()
 const [user , setUser] = useState({})
-  const login = (event)=>{
-    event.preventDefault();
-   
-    console.log('login' , user)
-    axiosInstance.post('/login' , user)
-    .then(response=>{
-       console.log(response)
-
-        localStorage.setItem('token' , response)
-        sessionStorage.setItem('token2' , response)
-        setLogin(response)
-        navigate('/')
-        Swal.fire('login')
-    })
-    .catch(err=>{
-      if(err){
-        Swal.fire({
-          title : err.message,
-          icon : 'warning',
-          toast : true,
-          showConfirmButton : false,
-          position : 'bottom-end',
-          timer : 3000
-        })
-      }
-    })
-     
-
-  }
+ let {login} = useContext(UserContext)
   const handleChange = (event)=>{
     setUser({...user , [event.target.name] : event.target.value})
   }

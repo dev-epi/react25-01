@@ -1,10 +1,11 @@
 // import avatar from '../assets/react.svg'
 // import avatarpublic from '/vite.svg'
 import { Link } from "react-router-dom";
-import { users } from "../data/users";
 import Card from "../ui/Card";
 import { useEffect, useState } from "react";
 export default function Home() {
+
+
   // let usersList = users;
   const [usersList, setUsers] = useState([]);
   useEffect(() => {
@@ -20,8 +21,7 @@ export default function Home() {
       });
   }
   const search = (event) => {
-    console.log(event.target.value);
-    console.log(event.keyCode);
+  
     // Enter keyboard
     if (event.keyCode == 13) {
       let text = event.target.value.trim();

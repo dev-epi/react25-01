@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axiosInstance from '../../services/axiosInstance'
+import { UserContext } from '../../services/UserContext'
 
-export default function SkillForm({pushSkill}) {
+export default function SkillForm() {
     const [skillsData , setSkillsData] = useState([])
     const [newSkill , setNewSkill] = useState([])
+    let {add} = useContext(UserContext)
         useEffect(()=>{
           // console
             axiosInstance.get('/skills')
@@ -16,7 +18,7 @@ export default function SkillForm({pushSkill}) {
             e.preventDefault();
             console.log(newSkill)
             let selectedSkill = skillsData.find(s=>s._id == newSkill)
-            pushSkill(selectedSkill)
+            add(selectedSkill)
         }
   return (
     <form onSubmit={handleSubmit}>

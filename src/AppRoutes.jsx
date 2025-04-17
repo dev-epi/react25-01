@@ -9,10 +9,11 @@ import ForgotPassword from "./auth/ForgotPassword";
 import ResetPassword from "./auth/ResetPassword";
 import NotFound from "./pages/NotFound";
 import { User } from "./pages/User";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "./services/UserContext";
 export default function AppRoutes() {
-  const [token , setToken] = useState(localStorage.getItem('token'))
-  console.log(token)
+
+  let {token} = useContext(UserContext)
   return (
     <BrowserRouter>
     <Routes>
@@ -20,12 +21,12 @@ export default function AppRoutes() {
       <Route path="/" element={token ? <Layout /> : <Navigate to='/auth/signin'/>}>
         <Route path="" element={<Home></Home>} />
         <Route path="user/:id" element={<User/>}/>
-        <Route path="profile" element={<Profile  logout={()=>setToken(null)}/>} />
+        <Route path="profile" element={<Profile  />} />
         <Route path="test" element={<h1>Bonjour</h1>} />
       </Route>
 
       <Route path="/auth" element={!token ? <AuthLayout /> : <Navigate to="/"/>}>
-        <Route path="signin" element={<Signin setLogin={(t)=>setToken(t)} />} />
+        <Route path="signin" element={<Signin  />} />
         <Route path="signup" element={<Signup />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="reset-password" element={<ResetPassword />} />

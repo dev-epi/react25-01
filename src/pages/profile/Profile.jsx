@@ -1,39 +1,12 @@
-import { useEffect, useState } from "react"
-import axiosInstance from "../../services/axiosInstance"
+import { useContext} from "react"
 import Skills from "./Skills"
+import { UserContext } from "../../services/UserContext"
 
 
-export default function Profile({logout}) {
+export default function Profile() {
 
-  const [user , setUser] = useState({})
-  useEffect(()=>{
-    loadData()
-  },[])
-  const loadData = ()=>{
-    axiosInstance.get('/auth')
-    .then(data=>{
-      console.log(data)
-      setUser(data)
-    })
-    .catch(()=>{
-     localStorage.clear()
-      logout()
-      // logout
-    })
-  }
-
-  const add = (skill)=>{
-    console.log(skill , 'from profile')
-    setUser({...user , skills : [...user.skills , skill]})
-    updateUser()
-  }
-
-  const updateUser = ()=>{
-    axiosInstance.put('/update-user/'+user._id , user)
-    .then(res=>{
-      console.log(res)
-    })
-  }
+  let {user} = useContext(UserContext)
+  
   return (
     <div className="container">
       <div className="card">
@@ -89,7 +62,7 @@ export default function Profile({logout}) {
 
     <div className="card">
       <h2>Skills</h2>
-        <Skills user={user} handlePush={add}/>
+        <Skills user={user} />
 
      
     </div>
