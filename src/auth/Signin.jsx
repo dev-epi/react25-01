@@ -12,7 +12,7 @@ const [user , setUser] = useState({})
   }
   return (
     <div>
-      <form  onSubmit={login}>
+      <form  onSubmit={(e)=>login(e , user)}>
             <h2>Sign In</h2>
             <label htmlFor="">Email Address</label>
             <div className="input-group">

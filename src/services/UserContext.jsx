@@ -45,11 +45,11 @@ export const UserProvider = ({children})=>{
         console.log(res)
       })
     }
-    const login = (event)=>{
+    const login = (event , u)=>{
         event.preventDefault();
        
-        console.log('login' , user)
-        axiosInstance.post('/login' , user)
+        console.log('login' , u)
+        axiosInstance.post('/login' , u)
         .then(response=>{
            console.log(response)
     
