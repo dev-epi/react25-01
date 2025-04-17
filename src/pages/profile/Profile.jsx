@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import axiosInstance from "../../services/axiosInstance"
+import Skills from "./Skills"
 
 
 export default function Profile({logout}) {
@@ -18,6 +19,19 @@ export default function Profile({logout}) {
      localStorage.clear()
       logout()
       // logout
+    })
+  }
+
+  const add = (skill)=>{
+    console.log(skill , 'from profile')
+    setUser({...user , skills : [...user.skills , skill]})
+    updateUser()
+  }
+
+  const updateUser = ()=>{
+    axiosInstance.put('/update-user/'+user._id , user)
+    .then(res=>{
+      console.log(res)
     })
   }
   return (
@@ -75,28 +89,9 @@ export default function Profile({logout}) {
 
     <div className="card">
       <h2>Skills</h2>
-      <form>
-        <div className="input-group" style={{marginBottom: '10px'}}>
-          <select>
-            <option value="">-- Select a skill --</option>
-            <option value="JavaScript">JavaScript</option>
-            <option value="PHP">PHP</option>
-            <option value="React.js">React.js</option>
-            <option value="Node.js">Node.js</option>
-            <option value="Laravel">Laravel</option>
-          </select>
-        </div>
-        <button className="btn btn-primary" type="submit">Add Skill</button>
-      </form>
+        <Skills user={user} handlePush={add}/>
 
-      <ul style={{marginTop: '20px'}}>
-        {
-          user?.skills?.map((item , index)=>{
-            return <li key={index}>{item.name}</li>
-          })
-        }
-        
-      </ul>
+     
     </div>
     </div>
   )
