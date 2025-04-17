@@ -5,6 +5,7 @@ export default function SkillForm({pushSkill}) {
     const [skillsData , setSkillsData] = useState([])
     const [newSkill , setNewSkill] = useState([])
         useEffect(()=>{
+          // console
             axiosInstance.get('/skills')
             .then(data=>{
                 setSkillsData(data)
