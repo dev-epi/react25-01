@@ -2,12 +2,14 @@
 // import avatarpublic from '/vite.svg'
 import { Link } from "react-router-dom";
 import Card from "../ui/Card";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { SocketContext } from "../services/SocketContext";
 export default function Home() {
 
 
   // let usersList = users;
   const [usersList, setUsers] = useState([]);
+  let {connectedUsers , ping} = useContext(SocketContext)
   useEffect(() => {
     fetchUsers()
   }, []);
@@ -54,7 +56,7 @@ export default function Home() {
                   <img src="/vite.svg" alt="" />
                 </div>
                 <h2>
-                  {user.firstName} {user.lastName}
+                  {user.firstName} {user.lastName} {connectedUsers.includes(user._id)&& 'connected'}
                 </h2>
                 <div className="rating">
                   <h4>6.4</h4>
@@ -66,6 +68,7 @@ export default function Home() {
                 <button className="btn btn-secondary">
                   <a href="feedbacks.html"> Feedbacks </a>
                 </button>
+                {connectedUsers.includes(user._id) && <button onClick={()=>ping(user._id)}>Ping</button>}
               </Card>
             </div>
           );
