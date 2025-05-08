@@ -9,8 +9,11 @@ import ForgotPassword from "./auth/ForgotPassword";
 import ResetPassword from "./auth/ResetPassword";
 import NotFound from "./pages/NotFound";
 import { User } from "./pages/User";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "./services/UserContext";
+import Feedbacks from "./pages/feedbacks/Feedbacks";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 export default function AppRoutes() {
 
   let {token} = useContext(UserContext)
@@ -18,10 +21,11 @@ export default function AppRoutes() {
     <BrowserRouter>
     <Routes>
     
-      <Route path="/" element={token ? <Layout /> : <Navigate to='/auth/signin'/>}>
+      <Route path="/" element={token ? <Provider store={store}><Layout /> </Provider> : <Navigate to='/auth/signin'/>}>
         <Route path="" element={<Home></Home>} />
         <Route path="user/:id" element={<User/>}/>
         <Route path="profile" element={<Profile  />} />
+        <Route path="feedbacks/:userId" element={<Feedbacks  />} />
         <Route path="test" element={<h1>Bonjour</h1>} />
       </Route>
 

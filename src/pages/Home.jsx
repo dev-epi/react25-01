@@ -5,25 +5,22 @@ import Card from "../ui/Card";
 import { useContext, useEffect, useState } from "react";
 import { SocketContext } from "../services/SocketContext";
 export default function Home() {
-
-
   // let usersList = users;
   const [usersList, setUsers] = useState([]);
-  let {connectedUsers , ping} = useContext(SocketContext)
+  let { connectedUsers, ping } = useContext(SocketContext);
   useEffect(() => {
-    fetchUsers()
+    fetchUsers();
   }, []);
 
-  const fetchUsers = ()=>{
+  const fetchUsers = () => {
     fetch("http://localhost:3000/users")
       .then((response) => response.json())
       .then((data) => {
         setUsers(data);
         console.log(data);
       });
-  }
+  };
   const search = (event) => {
-  
     // Enter keyboard
     if (event.keyCode == 13) {
       let text = event.target.value.trim();
@@ -34,8 +31,8 @@ export default function Home() {
             setUsers(data);
             console.log(data);
           });
-      } else{
-        fetchUsers()
+      } else {
+        fetchUsers();
       }
     }
   };
@@ -56,7 +53,8 @@ export default function Home() {
                   <img src="/vite.svg" alt="" />
                 </div>
                 <h2>
-                  {user.firstName} {user.lastName} {connectedUsers.includes(user._id)&& 'connected'}
+                  {user.firstName} {user.lastName}{" "}
+                  {connectedUsers.includes(user._id) && "connected"}
                 </h2>
                 <div className="rating">
                   <h4>6.4</h4>
@@ -65,10 +63,12 @@ export default function Home() {
                 <Link to={"/user/" + user._id}>
                   <button className="btn btn-primary">CV</button>
                 </Link>
-                <button className="btn btn-secondary">
-                  <a href="feedbacks.html"> Feedbacks </a>
-                </button>
-                {connectedUsers.includes(user._id) && <button onClick={()=>ping(user._id)}>Ping</button>}
+                <Link to={"/feedbacks/" + user._id}>
+                  <button className="btn btn-secondary">Feedbacks</button>
+                </Link>
+                {connectedUsers.includes(user._id) && (
+                  <button onClick={() => ping(user._id)}>Ping</button>
+                )}
               </Card>
             </div>
           );
